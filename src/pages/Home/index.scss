@@ -1,129 +1,105 @@
-.todo {
+$primary-color: #6c63ff;
+$text-color: #F7F7F7;
+$border-color: #6c63ff;
 
+.todo {
+  max-width: 750px;
+  width: 100%;      
+  margin: 0 auto;    
+  text-align: center;
 }
 
 .todo__title {
-    color: #6C63FF;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 18px;
 }
 
+.todo__field {
+  display: flex;
+  gap: 16px;
+  height: 38px;
+}
 
-$primary-color: #6C63FF;
-$text-color: #252525;
-$border-color: #6C63FF;
+.field__input {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  outline: none;
+  height: 38px;
 
-.todo {
-  max-width: 700px;
-  margin: 40px auto;
-  text-align: center;
-
-  &__title {
-    text-transform: uppercase;
+  &::placeholder {
+    color: #c3c1e5;
     font-weight: 500;
-    margin-bottom: 25px;
-  }
-
-  &__field {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-  }
-}
-
-// Поле поиска
-.field__container {
-  position: relative;
-  flex: 1;
-
-  .field__input {
-    width: 100%;
-    padding: 10px 40px 10px 15px;
-    border: 1px solid $border-color;
-    border-radius: 5px;
-    outline: none;
-    color: #b5b5b5;
-    
-    &::placeholder { color: #b5b5b5; }
-  }
-
-  .field__search-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    font-size: 16px;
+    line-height: 100%;
     pointer-events: none;
   }
 }
 
-// Кнопки и выпадающий список
-.todo__filter, .todo__theme-btn {
-  background-color: $primary-color;
-  color: white;
+.field {
+  &__search-wrapper {
+    position: relative;
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+  }
+  
+  &__search-icon {
+    position: absolute;
+    right: 8.5px;
+    pointer-events: none;
+    color: #6c63ff;
+  }
+}
+
+.button__all {
+  background-color: $border-color;
+  color: $text-color;
   border: none;
   border-radius: 5px;
-  padding: 0 15px;
+  width: 85px;
+  height: 38px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 65px;
+  font-weight: 500;
+  font-size: 18px;
 }
 
-// Список задач
-.todo__list {
-  list-style: none;
-  padding: 0;
-}
 
-.todo-item {
-  display: flex;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba($primary-color, 0.3);
-  gap: 15px;
 
-  &__label {
-    flex: 1;
-    text-align: left;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: $text-color;
-    cursor: pointer;
-  }
 
-  // Стили для выполненной задачи
-  &__checkbox:checked + &__label {
-    text-decoration: line-through;
-    color: rgba($text-color, 0.5);
-  }
 
-  // Кнопки действий (карандаш и корзина)
-  &__delete-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    opacity: 0.3;
-    transition: opacity 0.2s;
 
-    &:hover { opacity: 1; }
-  }
-}
 
-// Кастомный чекбокс
-.todo-item__checkbox {
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border: 2px solid $primary-color;
-  border-radius: 3px;
-  cursor: pointer;
-  position: relative;
 
-  &:checked {
-    background-color: $primary-color;
-    &::after {
-      content: '✔';
-      color: white;
-      position: absolute;
-      left: 4px;
-      top: -1px;
-      font-size: 16px;
-    }
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

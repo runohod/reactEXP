@@ -4,8 +4,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: start;
-  min-height: 100vh;
-  padding: 100px 30px;
+  padding: 40px;
   font-family: 'Kanit', sans-serif;
-  background-color: var(--color-gray-1);
 }
