@@ -1,11 +1,11 @@
 $primary-color: #6c63ff;
-$text-color: #F7F7F7;
+$text-color: #f7f7f7;
 $border-color: #6c63ff;
 
 .todo {
   max-width: 750px;
-  width: 100%;      
-  margin: 0 auto;    
+  width: 100%;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -22,12 +22,13 @@ $border-color: #6c63ff;
 }
 
 .field__input {
-  width: 100%;
+  width: 595px;
   padding: 11px 16px;
   border: 1px solid $border-color;
   border-radius: 5px;
   outline: none;
   height: 38px;
+  cursor: pointer;
 
   &::placeholder {
     color: #c3c1e5;
@@ -41,16 +42,16 @@ $border-color: #6c63ff;
 .field {
   &__search-wrapper {
     position: relative;
-    flex-grow: 1; 
+    flex-grow: 1;
     display: flex;
     align-items: center;
   }
-  
+
   &__search-icon {
     position: absolute;
     right: 8.5px;
     pointer-events: none;
-    color: #6c63ff;
+    color: $primary-color;
   }
 }
 
@@ -67,39 +68,75 @@ $border-color: #6c63ff;
   font-size: 18px;
 }
 
+.button__theme {
+  background-color: $border-color;
+  color: $text-color;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.todo__list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+  width: 100%;
+  align-items: center;
+}
 
+.todo__item {
+  display: flex;
+  align-items: center;
+  padding-bottom: 17px;
+  width: 100%;
+  width: 525px;
+  border-bottom: 1px solid $border-color;
+}
 
+.todo-item__checkbox {
+  width: 26px;
+  height: 26px;
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: 17px;
+}
 
+.todo-item__label { 
+  width: 420px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+    display: flex;
+  align-items: center;
+}
 
+.todo-item__delete-button {
+  background-color: #ffffff; 
+  border: none; 
+  width: 50px;         
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease; 
+  margin-left: 10px;         
+  color: #CDCDCD;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  &:hover {
+    svg path {
+      stroke: $primary-color;
+    }
+  }
+}
 
