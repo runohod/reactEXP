@@ -9,12 +9,6 @@ $border-color: #6c63ff;
   text-align: center;
 }
 
-.todo__title {
-  text-transform: uppercase;
-  font-weight: 500;
-  margin-bottom: 18px;
-}
-
 .button__all {
   background-color: $border-color;
   color: $text-color;
@@ -38,15 +32,6 @@ $border-color: #6c63ff;
   height: 38px;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.todo__list {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  margin-top: 30px;
-  width: 100%;
   align-items: center;
 }
 
