@@ -1,10 +1,12 @@
+import { useState } from 'react';
+import SearchField from '../../ui/SearchField/SearchField.jsx'
 import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
-import SearchIcon from '../../ui/Icons/SearchIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import TodoItem from '../../ui/TodoItem/TodoItem.jsx';
 import './index.scss';
 
 const Home = () => { 
+  const [searchQuery, setSearchQuery] = useState('');
 
   const tasks = [
     { id: 'task-1', text: 'NOTE #1' },
@@ -19,10 +21,7 @@ const Home = () => {
     <div className="todo">
       <h1 className="todo__title">TODO LIST</h1>
       <form className="todo__field field">
-        <div className="field__search-wrapper">
-          <input className="field__input" placeholder="Search note..." />
-          <SearchIcon className="field__search-icon" color="#6C63FF" />    
-        </div>
+        <SearchField placeholder="Search note..." iconColor="#6C63FF" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         <Button className="button__all">ALL</Button>
         <Button className="button__theme"><MoonIcon color="#F7F7F7" /></Button>
       </form>

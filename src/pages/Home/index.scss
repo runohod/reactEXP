@@ -15,46 +15,6 @@ $border-color: #6c63ff;
   margin-bottom: 18px;
 }
 
-.todo__field {
-  display: flex;
-  gap: 16px;
-  height: 38px;
-}
-
-.field__input {
-  width: 595px;
-  padding: 11px 16px;
-  border: 1px solid $border-color;
-  border-radius: 5px;
-  outline: none;
-  height: 38px;
-  cursor: pointer;
-
-  &::placeholder {
-    color: #c3c1e5;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    pointer-events: none;
-  }
-}
-
-.field {
-  &__search-wrapper {
-    position: relative;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-  }
-
-  &__search-icon {
-    position: absolute;
-    right: 8.5px;
-    pointer-events: none;
-    color: $primary-color;
-  }
-}
-
 .button__all {
   background-color: $border-color;
   color: $text-color;
