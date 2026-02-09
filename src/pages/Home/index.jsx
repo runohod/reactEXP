@@ -20,7 +20,7 @@ const Home = () => {
 
     return (
     <div className="todo">
-      <PageTitle>TODO LIST</PageTitle>
+      <h1 className="todo__title">TODO LIST</h1>
       <form className="todo__field field">
         <SearchField placeholder="Search note..." iconColor="#6C63FF" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         <Button className="button__all">ALL</Button>
