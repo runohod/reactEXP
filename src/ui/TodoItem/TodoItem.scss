@@ -23,11 +23,23 @@ $border-color: #6c63ff;
   margin-right: 17px;
 }
 
-.todo-item__label { 
+.todo-item__label {
   width: 420px;
   cursor: pointer;
   font-weight: 500;
   font-size: 20px;
-    display: flex;
+  display: flex;
   align-items: center;
+}
+
+.todo-item--completed {
+  .todo-item__label {
+    text-decoration: line-through;
+    color: #25252580;
+    opacity: 0.5;
+  }
+
+  .todo-item__checkbox {
+    background-color: $border-color;
+  }
 }

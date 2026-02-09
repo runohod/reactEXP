@@ -6,10 +6,10 @@ import './TodoItem.scss';
 const EditIcon = () => (<EditIcons />);
 const DeleteIcon = () => (<DeleteIcons />);
 
-const TodoItem = ({ text, id, onDelete = () => {}, onEdit = () => {} }) => {
+const TodoItem = ({ text, id, isDone, onDelete, onEdit, onToggle}) => {
   return (
-    <li className="todo__item">
-      <input className="todo-item__checkbox" id={id} type="checkbox"  onChange={() => {console.log(`Задача ${id} поменяла статус`);}}/>
+    <li className={`todo__item ${isDone ? 'todo-item--completed' : ''}`}>
+      <input className="todo-item__checkbox" id={id} type="checkbox" checked={isDone} onChange={() => onToggle(id)}/>
       <label className="todo-item__label" htmlFor={id}>{text}</label>
       <div className="todo-item__actions">
         <Button className="button--icon" onClick={() => onEdit(id)}>
