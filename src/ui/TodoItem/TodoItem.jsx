@@ -9,7 +9,7 @@ const DeleteIcon = () => (<DeleteIcons />);
 const TodoItem = ({ text, id, onDelete = () => {}, onEdit = () => {} }) => {
   return (
     <li className="todo__item">
-      <input className="todo-item__checkbox" id={id} type="checkbox"/>
+      <input className="todo-item__checkbox" id={id} type="checkbox"  onChange={() => {console.log(`Задача ${id} поменяла статус`);}}/>
       <label className="todo-item__label" htmlFor={id}>{text}</label>
       <div className="todo-item__actions">
         <Button className="button--icon" onClick={() => onEdit(id)}>

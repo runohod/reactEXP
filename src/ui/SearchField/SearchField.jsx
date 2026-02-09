@@ -6,11 +6,12 @@ const SearchField = ({
   value, 
   onChange, 
   className = '', 
-  iconColor = '' 
+  iconColor = '',
+  ...otherProps
 
 }) => {
   return (
-    <div className={`field__search-wrapper ${className}`}>
+    <div className={`field__search-wrapper ${className}`} {...otherProps}>
       <input 
         type="text"
         className="field__input" 
