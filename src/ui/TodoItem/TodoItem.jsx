@@ -15,7 +15,7 @@ const TodoItem = ({ text, id, isDone, onDelete, onEdit, onToggle}) => {
         <Button className="button--icon" onClick={() => onEdit(id)}>
           <EditIcon />
         </Button>
-        <Button className="button--icon" onClick={() => onDelete(id)}>
+        <Button className="button--icon" onClick={() => onDelete(id)} iconColor="#E50000">
           <DeleteIcon />
         </Button>
       </div>

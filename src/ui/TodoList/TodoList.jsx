@@ -1,9 +1,15 @@
 import TodoItem from '../TodoItem/TodoItem';
+// import EmptyIcon from '../Icons/EmptyIcon.jsx';
 import './TodoList.scss'
 
 const TodoList = ({ tasks, onDelete, onEdit, onToggle }) => {
     if (tasks.length === 0) {
-    return <p className="not-found">Задачи не найдены...</p>;
+      return (
+        // <div className="no-found">
+        // <EmptyIcon />
+        <p className="not-found">Empty...</p>
+        // </div>
+      );
     }
   return (
     <ul className="todo__list"> 

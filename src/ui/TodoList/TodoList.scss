@@ -8,8 +8,14 @@
 }
 
 .not-found {
-  text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 20px;
   margin-bottom: 18px;
   margin-top: 50px;
+  color: #252525;
+}
+
+.no-found {
+  width: 221px;
+  height: 174px;
 }

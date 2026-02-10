@@ -1,3 +1,5 @@
+$primary-color: #6c63ff;
+
 .custom-button {
   display: flex;
   justify-content: center;
@@ -8,6 +10,7 @@
   background: transparent;
   padding: 0; 
   transition: opacity 0.2s;
+  color: #CDCDCD;
 
   &:hover {
     opacity: 0.7;
@@ -20,7 +23,8 @@
   
   &:hover {
     svg path {
-      stroke: #6c63ff; 
+      // stroke: #6c63ff; 
+      stroke: var(--hover-color, $primary-color);
     }
   }
 }

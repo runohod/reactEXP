@@ -43,3 +43,8 @@ $border-color: #6c63ff;
     background-color: $border-color;
   }
 }
+
+.todo-item__actions {
+  display: flex;
+  gap: 5px;
+}
