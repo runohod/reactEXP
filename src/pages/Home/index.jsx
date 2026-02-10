@@ -7,6 +7,7 @@ import './index.scss';
 
 const Home = () => { 
   const [searchQuery, setSearchQuery] = useState('');
+  const [editId, setEditId] = useState('');
 
   const [tasks, setTasks ] = useState([
     { id: 'task-1', text: 'NOTE #1', isDone: true},
@@ -15,20 +16,33 @@ const Home = () => {
   ]);
 
   const handleDelete = (id) => {setTasks(tasks.filter(task => task.id !== id));};
-  const handleEdit = (id) => console.log('Редактируем задачу:', id);
+  const handleEdit = (id) => {
+  const taskToEdit = tasks.find(task => task.id === id);
+    if (taskToEdit) {
+      setSearchQuery(taskToEdit.text); 
+      setEditId(id);
+    }
+  };
 
   const addTask = (e) => {
-    e.preventDefault(); 
-    if (!searchQuery.trim()) return; 
+      if (e) e.preventDefault(); 
+      if (!searchQuery.trim()) return; 
 
-    const newTask = {
-      id: crypto.randomUUID(),
-      text: searchQuery,
-      isDone: false 
-    };
+      if (editId) {
+        setTasks(tasks.map(task => 
+          task.id === editId ? { ...task, text: searchQuery } : task
+        ));
+        setEditId(''); 
+      } else {
+        const newTask = {
+          id: crypto.randomUUID(),
+          text: searchQuery,
+          isDone: false 
+        };
+        setTasks([...tasks, newTask]); 
+      }
 
-    setTasks([...tasks, newTask]); 
-    setSearchQuery(''); 
+      setSearchQuery(''); 
   };
 
   const handleToggle = (id) => {
@@ -36,6 +50,8 @@ const Home = () => {
       task.id === id ? { ...task, isDone: !task.isDone } : task
     ));
   };
+
+
 
     return (
     <div className="todo">
@@ -53,7 +69,7 @@ const Home = () => {
         onToggle={handleToggle}
       />
 
-      <Button className="button__add" onClick={addTask}>+</Button>
+      <Button className="button__add" onClick={addTask}>{editId !== '' ? '✓' : '+'}</Button>
     </div>
   )
 }
