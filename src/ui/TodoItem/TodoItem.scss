@@ -23,6 +23,12 @@ $border-color: #6c63ff;
   margin-right: 17px;
 }
 
+.todo-item__checkbox:checked {
+ background-image: url("../../assets/svg/checked.svg");
+ background-repeat: no-repeat;
+ background-position: center center;
+}
+
 .todo-item__label {
   width: 420px;
   cursor: pointer;
