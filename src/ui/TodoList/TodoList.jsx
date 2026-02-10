@@ -3,7 +3,7 @@ import './TodoList.scss'
 
 const TodoList = ({ tasks, onDelete, onEdit, onToggle }) => {
     if (tasks.length === 0) {
-    return <p>Задачи не найдены...</p>;
+    return <p className="not-found">Задачи не найдены...</p>;
     }
   return (
     <ul className="todo__list"> 

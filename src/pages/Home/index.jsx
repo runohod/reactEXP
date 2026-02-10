@@ -14,7 +14,7 @@ const Home = () => {
     { id: 'task-3', text: 'NOTE #3', isDone: false},
   ]);
 
-  const handleDelete = (id) => console.log('Задача удалена:', id);
+  const handleDelete = (id) => {setTasks(tasks.filter(task => task.id !== id));};
   const handleEdit = (id) => console.log('Редактируем задачу:', id);
 
   const addTask = (e) => {
