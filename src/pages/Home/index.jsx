@@ -7,9 +7,6 @@ import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
 
 const Home = () => { 
-  const [searchQuery, setSearchQuery] = useState('');
-  // const [editId, setEditId] = useState('');
-  const [newTaskText, setNewTaskText] = useState('');
 
   const [tasks, setTasks ] = useState([
     { id: 'task-1', text: 'NOTE #1', isDone: true},
@@ -17,10 +14,15 @@ const Home = () => {
     { id: 'task-3', text: 'NOTE #3', isDone: false},
   ]);
 
+  const [searchQuery, setSearchQuery] = useState('');
+  // const [editId, setEditId] = useState('');
+  const [newTaskText, setNewTaskText] = useState('');
+  const filteredTasks = tasks.filter((task) =>task.text.toLowerCase().includes(searchQuery.toLowerCase()));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {setIsModalOpen(true);};
-
   const handleDelete = (id) => {setTasks(tasks.filter(task => task.id !== id));};
+  const handleToggle = (id) => {setTasks(tasks.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));};
+  const handleCancel = () => {setIsModalOpen(false);setNewTaskText('');};
   // const handleEdit = (id) => {
   // const taskToEdit = tasks.find(task => task.id === id);
   //   if (taskToEdit) {
@@ -28,17 +30,6 @@ const Home = () => {
   //     setEditId(id);
   //   }
   // };
-
-  const handleToggle = (id) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, isDone: !task.isDone } : task
-    ));
-  };
-
-  const handleCancel = () => {
-  setIsModalOpen(false);
-  setNewTaskText('');
-  };
 
   const addTask = () => {
     if (!newTaskText.trim()) return;
@@ -63,7 +54,7 @@ const Home = () => {
       </form>
 
       <TodoList 
-        tasks={tasks}
+        tasks={filteredTasks}
         onDelete={handleDelete} 
         // onEdit={handleEdit} 
         onToggle={handleToggle}
