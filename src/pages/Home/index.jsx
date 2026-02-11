@@ -20,8 +20,8 @@ const Home = () => {
   const filteredTasks = tasks.filter((task) =>task.text.toLowerCase().includes(searchQuery.toLowerCase()));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {setIsModalOpen(true);};
-  const handleDelete = (id) => {setTasks(tasks.filter(task => task.id !== id));};
-  const handleToggle = (id) => {setTasks(tasks.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));};
+  const handleDelete = (id) => {setTasks(prev => prev.filter(task => task.id !== id));};
+  const handleToggle = (id) => {setTasks(prev => prev.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));};
   const handleCancel = () => {setIsModalOpen(false);setNewTaskText('');};
   // const handleEdit = (id) => {
   // const taskToEdit = tasks.find(task => task.id === id);
@@ -40,7 +40,7 @@ const Home = () => {
       isDone: false
     };
 
-    setTasks([...tasks, newTask]);
+    setTasks(prev => [...prev, newTask]);
     handleCancel(); 
   };
 
