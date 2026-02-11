@@ -25,11 +25,11 @@ const Home = () => {
   const handleToggle = (id) => {setTasks(prev => prev.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));};
   const handleCancel = () => {setIsModalOpen(false);setNewTaskText('');};
 
-const handleUpdateText = (id, newText) => {
-  setTasks(prev => prev.map(task => 
-    task.id === id ? { ...task, text: newText } : task
-  ));
-};
+  const handleUpdateText = (id, newText) => {
+    setTasks(prev => prev.map(task => 
+      task.id === id ? { ...task, text: newText } : task
+    ));
+  };
 
   const addTask = () => {
     if (!newTaskText.trim()) return;

@@ -38,6 +38,7 @@ const TodoItem = ({
           onChange={(e) => onUpdateText(id, e.target.value)} 
           onKeyDown={(e) => { 
             if (e.key === 'Enter') setEditId(null);
+            if (e.key === 'Escape') setEditId(null); 
           }} 
           onBlur={() => setEditId(null)} 
         />
