@@ -54,3 +54,14 @@ $border-color: #6c63ff;
   display: flex;
   gap: 5px;
 }
+
+.todo-item__edit {
+  flex: 1;
+  font-size: 16px;
+  color: #C8C8C8;
+  border: none;
+  outline: none;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 5px;
+}

@@ -15,7 +15,8 @@ const Home = () => {
   ]);
 
   const [searchQuery, setSearchQuery] = useState('');
-  // const [editId, setEditId] = useState('');
+  const [editId, setEditId] = useState('');
+  const handleEdit = (id) => {setEditId(id);};
   const [newTaskText, setNewTaskText] = useState('');
   const filteredTasks = tasks.filter((task) =>task.text.toLowerCase().includes(searchQuery.toLowerCase()));
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,13 +24,12 @@ const Home = () => {
   const handleDelete = (id) => {setTasks(prev => prev.filter(task => task.id !== id));};
   const handleToggle = (id) => {setTasks(prev => prev.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));};
   const handleCancel = () => {setIsModalOpen(false);setNewTaskText('');};
-  // const handleEdit = (id) => {
-  // const taskToEdit = tasks.find(task => task.id === id);
-  //   if (taskToEdit) {
-  //     setSearchQuery(taskToEdit.text); 
-  //     setEditId(id);
-  //   }
-  // };
+
+const handleUpdateText = (id, newText) => {
+  setTasks(prev => prev.map(task => 
+    task.id === id ? { ...task, text: newText } : task
+  ));
+};
 
   const addTask = () => {
     if (!newTaskText.trim()) return;
@@ -56,8 +56,11 @@ const Home = () => {
       <TodoList 
         tasks={filteredTasks}
         onDelete={handleDelete} 
-        // onEdit={handleEdit} 
+        onEdit={handleEdit} 
         onToggle={handleToggle}
+        editId={editId} 
+        setEditId={setEditId} 
+        onUpdateText={handleUpdateText}
       />
 
       <Button className="button__add" onClick={openModal}>+</Button>

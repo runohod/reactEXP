@@ -2,7 +2,7 @@ import TodoItem from '../TodoItem/TodoItem';
 import EmptyIcon from '../Icons/EmptyIcon.jsx';
 import './TodoList.scss'
 
-const TodoList = ({ tasks, onDelete, onEdit, onToggle }) => {
+const TodoList = ({ tasks, onDelete, onEdit, onToggle, editId, setEditId, onUpdateText }) => {
     if (tasks.length === 0) {
       return (
         <div className="no-found">
@@ -22,6 +22,9 @@ const TodoList = ({ tasks, onDelete, onEdit, onToggle }) => {
             onDelete={onDelete} 
             onEdit={onEdit} 
             onToggle={onToggle}
+            editId={editId} 
+            setEditId={setEditId} 
+            onUpdateText={onUpdateText}
           />
         ))}
     </ul>
