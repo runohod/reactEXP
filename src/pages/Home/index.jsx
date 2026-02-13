@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
 import SearchField from '../../ui/SearchField/SearchField.jsx'
@@ -14,21 +15,37 @@ const Home = () => {
     { id: 'task-3', text: 'NOTE #3', isDone: false},
   ]);
 
+  const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [editId, setEditId] = useState('');
   const handleEdit = (id) => {setEditId(id);};
   const [newTaskText, setNewTaskText] = useState('');
-  const filteredTasks = tasks.filter((task) =>task.text.toLowerCase().includes(searchQuery.toLowerCase()));
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const filteredTasks = tasks.filter((task) =>{
+    const search = task.text.toLowerCase().includes(searchQuery.toLowerCase()) 
+    if (!search) return false;
+
+    if (filter === "all") return true;
+    if (filter === "true") return task.isDone === true;
+    if (filter === "false") return task.isDone === false;
+    return true 
+  });
+
   const openModal = () => {setIsModalOpen(true);};
   const handleDelete = (id) => {setTasks(prev => prev.filter(task => task.id !== id));};
   const handleToggle = (id) => {setTasks(prev => prev.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));};
   const handleCancel = () => {setIsModalOpen(false);setNewTaskText('');};
 
   const handleUpdateText = (id, newText) => {
+    if (newText.trim() === "") {
+      handleDelete(id);
+      setEditId(null)
+    } else {
     setTasks(prev => prev.map(task => 
       task.id === id ? { ...task, text: newText } : task
     ));
+    }
   };
 
   const addTask = () => {
@@ -49,7 +66,7 @@ const Home = () => {
       <h1 className="todo__title">TODO LIST</h1>
       <form className="todo__field field">
         <SearchField placeholder="Search note..." iconColor="#6C63FF" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
-        <Button type="button" className="button__all" onClick={(e) => {e.preventDefault(); console.log("Выбор всех задач");}}>ALL</Button>
+        <Select className="select__all" value={filter} onChange={setFilter}/>        
         <Button type="button" className="button__theme" onClick={(e) => {e.preventDefault(); console.log("Тема сменилась");}}><MoonIcon color="#F7F7F7"/></Button>
       </form>
 
@@ -79,7 +96,3 @@ const Home = () => {
 }
 
 export default Home
-
-
-
-
