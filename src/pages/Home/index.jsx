@@ -24,16 +24,12 @@ const Home = () => {
 
   const filteredTasks = tasks.filter((task) =>{
     const search = task.text.toLowerCase().includes(searchQuery.toLowerCase()) 
-    let searchFilter = false;
+    if (!search) return false;
 
-    if (filter === "all") {
-      searchFilter = true;
-    } else if (filter === "true") {
-      searchFilter = task.isDone === true;
-    } else if (filter === "false") {
-      searchFilter = task.isDone === false;
-    }
-    return search && searchFilter;
+    if (filter === "all") return true;
+    if (filter === "true") return task.isDone === true;
+    if (filter === "false") return task.isDone === false;
+    return true 
   });
 
   const openModal = () => {setIsModalOpen(true);};
@@ -100,7 +96,3 @@ const Home = () => {
 }
 
 export default Home
-
-
-
-

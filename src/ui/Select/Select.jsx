@@ -1,8 +1,10 @@
+import clsx from 'clsx'
 import './Select.scss'
 
 const Select = ({value, onChange, className=''}) => {
+    const classes = clsx('select-all', className);
     return (
-        <select className={`select-all ${className}`} value={value} onChange={(e) => onChange(e.target.value)}>
+        <select className={classes} value={value} onChange={(e) => onChange(e.target.value)}>
             <option value="all">ALL</option>
             <option value="true">Complete</option>
             <option value="false">Incomplete</option>
@@ -11,3 +13,5 @@ const Select = ({value, onChange, className=''}) => {
 };
 
 export default Select
+
+
