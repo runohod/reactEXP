@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
@@ -60,6 +60,11 @@ const Home = () => {
     setTasks(prev => [...prev, newTask]);
     handleCancel(); 
   };
+
+  useEffect ( () => {
+    console.log('Созрянаем данняые', tasks)
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
     return (
     <div className="todo">
