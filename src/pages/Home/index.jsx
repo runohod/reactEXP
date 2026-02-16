@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
@@ -7,14 +7,27 @@ import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
 
+  const getTodosFromStorage = () => {
+    try {
+      const savedTasks = localStorage.getItem('tasks');
+       if (savedTasks) {
+        return JSON.parse(savedTasks)
+       }
+      return [
+        { id: 'task-1', text: 'NOTE #1', isDone: true},
+        { id: 'task-2', text: 'NOTE #2', isDone: false},
+        { id: 'task-3', text: 'NOTE #3', isDone: false},
+      ]
+    }
+    catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
 const Home = () => { 
 
-  const [tasks, setTasks ] = useState([
-    { id: 'task-1', text: 'NOTE #1', isDone: true},
-    { id: 'task-2', text: 'NOTE #2', isDone: false},
-    { id: 'task-3', text: 'NOTE #3', isDone: false},
-  ]);
-
+  const [tasks, setTasks] = useState(getTodosFromStorage);
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [editId, setEditId] = useState('');
@@ -27,7 +40,7 @@ const Home = () => {
     if (!search) return false;
 
     if (filter === "all") return true;
-    if (filter === "true") return task.isDone === true;
+    if (filter === "true") return task.isDone === true; 
     if (filter === "false") return task.isDone === false;
     return true 
   });
@@ -61,6 +74,10 @@ const Home = () => {
     handleCancel(); 
   };
 
+  useEffect ( () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
+
     return (
     <div className="todo">
       <h1 className="todo__title">TODO LIST</h1>
@@ -84,6 +101,7 @@ const Home = () => {
       
       {isModalOpen && (
         <ModalOpen 
+          autoFocus={true}
           value={newTaskText} 
           onChange={(e) => setNewTaskText(e.target.value)} 
           onKeyDown={(e) => { if (e.key === 'Enter') { addTask(e);}}}
