@@ -9,11 +9,19 @@ import './index.scss';
 
 const Home = () => { 
 
-  const [tasks, setTasks ] = useState([
-    { id: 'task-1', text: 'NOTE #1', isDone: true},
-    { id: 'task-2', text: 'NOTE #2', isDone: false},
-    { id: 'task-3', text: 'NOTE #3', isDone: false},
-  ]);
+    const [tasks, setTasks ] = useState( () => {
+      const savedTasks = localStorage.getItem('tasks')
+
+      if (savedTasks) {
+        return JSON.parse(savedTasks)
+      }
+
+      return [
+        { id: 'task-1', text: 'NOTE #1', isDone: true},
+        { id: 'task-2', text: 'NOTE #2', isDone: false},
+        { id: 'task-3', text: 'NOTE #3', isDone: false},
+      ]
+    })
 
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,7 +35,7 @@ const Home = () => {
     if (!search) return false;
 
     if (filter === "all") return true;
-    if (filter === "true") return task.isDone === true;
+    if (filter === "true") return task.isDone === true; 
     if (filter === "false") return task.isDone === false;
     return true 
   });
@@ -62,7 +70,6 @@ const Home = () => {
   };
 
   useEffect ( () => {
-    console.log('Созрянаем данняые', tasks)
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
