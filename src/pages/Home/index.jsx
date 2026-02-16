@@ -101,6 +101,7 @@ const Home = () => {
       
       {isModalOpen && (
         <ModalOpen 
+          autoFocus={true}
           value={newTaskText} 
           onChange={(e) => setNewTaskText(e.target.value)} 
           onKeyDown={(e) => { if (e.key === 'Enter') { addTask(e);}}}

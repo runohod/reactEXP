@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+// import { useEffect, useRef } from 'react';
 import './ModalOpen.scss'
 
 const ModalOpen = ({
@@ -8,23 +8,24 @@ const ModalOpen = ({
   onKeyDown,
   onCancel,
   onApply,
+  autoFocus = false
 
 }) => { 
     
-const inputRef = useRef(null);
+// const inputRef = useRef(null);
 
-useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-}, []);
+// useEffect(() => {
+//     if (inputRef.current) {
+//       inputRef.current.focus();
+//     }
+// }, []);
 
   return (
     <div className="modal">
         <div className="modal__content">
             <h2 className="modal__title">NEW NOTE</h2>
                 <input 
-                    ref={inputRef}
+                    autoFocus={autoFocus}
                     className="modal__input"
                     type="text" 
                     placeholder={placeholder}
@@ -42,5 +43,3 @@ useEffect(() => {
 };
 
 export default ModalOpen;
-
-      
