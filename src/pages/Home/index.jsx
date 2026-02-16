@@ -7,22 +7,27 @@ import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
 
-const Home = () => { 
-
-    const [tasks, setTasks ] = useState( () => {
-      const savedTasks = localStorage.getItem('tasks')
-
-      if (savedTasks) {
+  const getTodosFromStorage = () => {
+    try {
+      const savedTasks = localStorage.getItem('tasks');
+       if (savedTasks) {
         return JSON.parse(savedTasks)
-      }
-
+       }
       return [
         { id: 'task-1', text: 'NOTE #1', isDone: true},
         { id: 'task-2', text: 'NOTE #2', isDone: false},
         { id: 'task-3', text: 'NOTE #3', isDone: false},
       ]
-    })
+    }
+    catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
 
+const Home = () => { 
+
+  const [tasks, setTasks] = useState(getTodosFromStorage);
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [editId, setEditId] = useState('');
