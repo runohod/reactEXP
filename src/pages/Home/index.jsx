@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
@@ -31,26 +31,27 @@ const Home = () => {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [editId, setEditId] = useState('');
-  const handleEdit = (id) => {setEditId(id);};
   const [newTaskText, setNewTaskText] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const filteredTasks = tasks.filter((task) =>{
-    const search = task.text.toLowerCase().includes(searchQuery.toLowerCase()) 
-    if (!search) return false;
+  const filteredTasks = useMemo(() => {
+      return tasks.filter((task) => {
+        const search = task.text.toLowerCase().includes(searchQuery.toLowerCase());
+        if (!search) return false;
+        if (filter === "all") return true;
+        if (filter === "true") return task.isDone;
+        if (filter === "false") return !task.isDone;
+        return true;
+      });
+  }, [tasks, filter, searchQuery]);
 
-    if (filter === "all") return true;
-    if (filter === "true") return task.isDone === true; 
-    if (filter === "false") return task.isDone === false;
-    return true 
-  });
+  const handleEdit = useCallback((id) => {setEditId(id);}, []);
+  const openModal = useCallback(() => {setIsModalOpen(true);}, []);
+  const handleDelete = useCallback((id) => {setTasks(prev => prev.filter(task => task.id !== id));}, []);
+  const handleToggle = useCallback((id) => {setTasks(prev => prev.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));}, []);
+  const handleCancel = useCallback (() => {setIsModalOpen(false);setNewTaskText('');}, []);
 
-  const openModal = () => {setIsModalOpen(true);};
-  const handleDelete = (id) => {setTasks(prev => prev.filter(task => task.id !== id));};
-  const handleToggle = (id) => {setTasks(prev => prev.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));};
-  const handleCancel = () => {setIsModalOpen(false);setNewTaskText('');};
-
-  const handleUpdateText = (id, newText) => {
+  const handleUpdateText = useCallback((id, newText) => {
     if (newText.trim() === "") {
       handleDelete(id);
       setEditId(null)
@@ -59,9 +60,9 @@ const Home = () => {
       task.id === id ? { ...task, text: newText } : task
     ));
     }
-  };
+  }, [handleDelete]);
 
-  const addTask = () => {
+  const addTask = useCallback(() => {
     if (!newTaskText.trim()) return;
 
     const newTask = {
@@ -71,8 +72,8 @@ const Home = () => {
     };
 
     setTasks(prev => [...prev, newTask]);
-    handleCancel(); 
-  };
+    handleCancel();
+  }, [newTaskText]);
 
   useEffect ( () => {
     localStorage.setItem('tasks', JSON.stringify(tasks))

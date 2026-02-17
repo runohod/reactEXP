@@ -1,3 +1,4 @@
+import { memo } from 'react'; 
 import TodoItem from '../TodoItem/TodoItem';
 import EmptyIcon from '../Icons/EmptyIcon.jsx';
 import './TodoList.scss'
@@ -16,13 +17,13 @@ const TodoList = ({ tasks, onDelete, onEdit, onToggle, editId, setEditId, onUpda
         {tasks.map((task) => (
           <TodoItem 
             key={task.id} 
+            isDone={task.isDone}
             id={task.id} 
             text={task.text} 
-            isDone={task.isDone}
+            isEditing={task.id === editId}
             onDelete={onDelete} 
             onEdit={onEdit} 
             onToggle={onToggle}
-            editId={editId} 
             setEditId={setEditId} 
             onUpdateText={onUpdateText}
           />
@@ -31,4 +32,4 @@ const TodoList = ({ tasks, onDelete, onEdit, onToggle, editId, setEditId, onUpda
   );
 };
 
-export default TodoList;
+export default memo(TodoList);
