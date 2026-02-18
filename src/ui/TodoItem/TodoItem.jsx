@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import Button from '../Button/Button.jsx';
 import DeleteIcons from '../Icons/DeleteIcons.jsx';
 import EditIcons from '../Icons/EditIcons.jsx';
 import './TodoItem.scss';
 
-const EditIcon = () => (<EditIcons />);
-const DeleteIcon = () => (<DeleteIcons />);
+const EditIcon = () => <EditIcons />;
+const DeleteIcon = () => <DeleteIcons />;
 
 const TodoItem = ({ 
   text, 
@@ -13,11 +14,19 @@ const TodoItem = ({
   onDelete, 
   onEdit, 
   onToggle, 
-  editId, 
+  isEditing, 
   setEditId, 
   onUpdateText 
 }) => {
-  const isEditing = id === editId;
+ 
+  const handleToggle = () => onToggle(id);
+  const handleEdit = () => onEdit(id);
+  const handleDelete = () => onDelete(id);
+  const handleUpdate = (e) => onUpdateText(id, e.target.value);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === 'Escape') setEditId(null);
+  };
 
   return (
     <li className={`todo__item ${isDone ? 'todo-item--completed' : ''}`}>
@@ -26,7 +35,7 @@ const TodoItem = ({
         id={id} 
         type="checkbox" 
         checked={isDone} 
-        onChange={() => onToggle(id)}
+        onChange={handleToggle}
       />
       
       {isEditing ? (
@@ -35,11 +44,8 @@ const TodoItem = ({
           type="text"
           className="todo-item__edit" 
           value={text} 
-          onChange={(e) => onUpdateText(id, e.target.value)} 
-          onKeyDown={(e) => { 
-            if (e.key === 'Enter') setEditId(null);
-            if (e.key === 'Escape') setEditId(null); 
-          }} 
+          onChange={handleUpdate}
+          onKeyDown={handleKeyDown} 
           onBlur={() => setEditId(null)} 
         />
       ) : (
@@ -47,10 +53,10 @@ const TodoItem = ({
       )}
 
       <div className="todo-item__actions">
-        <Button className="button--icon" onClick={() => onEdit(id)}>
+        <Button className="button--icon" onClick={handleEdit}>
           <EditIcon />
         </Button>
-        <Button className="button--icon" onClick={() => onDelete(id)} iconColor="#E50000">
+        <Button className="button--icon" onClick={handleDelete}>
           <DeleteIcon />
         </Button>
       </div>
@@ -58,8 +64,4 @@ const TodoItem = ({
   );
 };
 
-export default TodoItem;
-
-
-
-
+export default memo(TodoItem);
