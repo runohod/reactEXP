@@ -1,11 +1,11 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import Button from '../Button/Button.jsx';
 import DeleteIcons from '../Icons/DeleteIcons.jsx';
 import EditIcons from '../Icons/EditIcons.jsx';
 import './TodoItem.scss';
 
-const EditIcon = memo(() => <EditIcons />);
-const DeleteIcon = memo(() => <DeleteIcons />);
+const EditIcon = () => <EditIcons />;
+const DeleteIcon = () => <DeleteIcons />;
 
 const TodoItem = ({ 
   text, 
@@ -18,14 +18,15 @@ const TodoItem = ({
   setEditId, 
   onUpdateText 
 }) => {
-  const handleToggle = useCallback(() => onToggle(id), [onToggle, id]);
-  const handleEdit = useCallback(() => onEdit(id), [onEdit, id]);
-  const handleDelete = useCallback(() => onDelete(id), [onDelete, id]);
-  const handleUpdate = useCallback((e) => onUpdateText(id, e.target.value), [onUpdateText, id]);
+ 
+  const handleToggle = () => onToggle(id);
+  const handleEdit = () => onEdit(id);
+  const handleDelete = () => onDelete(id);
+  const handleUpdate = (e) => onUpdateText(id, e.target.value);
 
-  const handleKeyDown = useCallback((e) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === 'Escape') setEditId(null);
-  }, [setEditId]);
+  };
 
   return (
     <li className={`todo__item ${isDone ? 'todo-item--completed' : ''}`}>
@@ -45,6 +46,7 @@ const TodoItem = ({
           value={text} 
           onChange={handleUpdate}
           onKeyDown={handleKeyDown} 
+          onBlur={() => setEditId(null)} 
         />
       ) : (
         <label className="todo-item__label" htmlFor={id}>{text}</label>
@@ -54,7 +56,7 @@ const TodoItem = ({
         <Button className="button--icon" onClick={handleEdit}>
           <EditIcon />
         </Button>
-        <Button className="button--icon" onClick={handleDelete} iconColor="#E50000">
+        <Button className="button--icon" onClick={handleDelete}>
           <DeleteIcon />
         </Button>
       </div>
@@ -63,7 +65,3 @@ const TodoItem = ({
 };
 
 export default memo(TodoItem);
-
-
-
-
