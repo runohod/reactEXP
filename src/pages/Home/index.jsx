@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { ThemeContext } from '../../ui/context/themeContext.jsx';
 import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
@@ -33,6 +34,11 @@ const Home = () => {
   const [editId, setEditId] = useState('');
   const [newTaskText, setNewTaskText] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [theme, toggleTheme] = useState(false);
+
+  const handleToggleTheme = (event) => {event.preventDefault(); toggleTheme(prev => !prev);};
+
+  const themeClass = theme ? 'dark-theme' : 'light-theme';
 
   const filteredTasks = useMemo(() => {
       return tasks.filter((task) => {
@@ -80,38 +86,40 @@ const Home = () => {
   }, [tasks])
 
     return (
-    <div className="todo">
-      <h1 className="todo__title">TODO LIST</h1>
-      <form className="todo__field field">
-        <SearchField placeholder="Search note..." iconColor="#6C63FF" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
-        <Select className="select__all" value={filter} onChange={setFilter}/>        
-        <Button type="button" className="button__theme" onClick={(e) => {e.preventDefault(); console.log("Тема сменилась");}}><MoonIcon color="#F7F7F7"/></Button>
-      </form>
+    <ThemeContext.Provider value={{ theme, toggleTheme: handleToggleTheme}}> 
+      <div className={`todo ${themeClass}`}>
+        <h1 className="todo__title">TODO LIST</h1>
+        <form className="todo__field field">
+          <SearchField placeholder="Search note..." iconColor="#6C63FF" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+          <Select className="select__all" value={filter} onChange={setFilter}/>        
+          <Button type="button" className="button__theme" onClick={handleToggleTheme}><MoonIcon color="#F7F7F7"/></Button>
+        </form>
 
-      <TodoList 
-        tasks={filteredTasks}
-        onDelete={handleDelete} 
-        onEdit={handleEdit} 
-        onToggle={handleToggle}
-        editId={editId} 
-        setEditId={setEditId} 
-        onUpdateText={handleUpdateText}
-      />
+        <TodoList 
+          tasks={filteredTasks}
+          onDelete={handleDelete} 
+          onEdit={handleEdit} 
+          onToggle={handleToggle}
+          editId={editId} 
+          setEditId={setEditId} 
+          onUpdateText={handleUpdateText}
+        /> 
 
-      <Button className="button__add" onClick={openModal}>+</Button>
-      
-      {isModalOpen && (
-        <ModalOpen 
-          autoFocus={true}
-          value={newTaskText} 
-          onChange={(e) => setNewTaskText(e.target.value)} 
-          onKeyDown={(e) => { if (e.key === 'Enter') { addTask(e);}}}
-          onCancel={handleCancel} 
-          onApply={addTask} 
-        />
-      )}
-    </div>
-  )
+        <Button className="button__add" onClick={openModal}>+</Button>
+        
+        {isModalOpen && (
+          <ModalOpen 
+            autoFocus={true}
+            value={newTaskText} 
+            onChange={(e) => setNewTaskText(e.target.value)} 
+            onKeyDown={(e) => { if (e.key === 'Enter') { addTask(e);}}}
+            onCancel={handleCancel} 
+            onApply={addTask} 
+          />
+        )}
+      </div>
+    </ThemeContext.Provider>
+  );
 }
 
 export default Home

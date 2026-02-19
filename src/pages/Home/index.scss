@@ -1,5 +1,7 @@
 $primary-color: #6c63ff;
 $text-color: #f7f7f7;
+$text-color-dark: #000000;
+$border-color: #6c63ff;
 $border-color: #6c63ff;
 
 .todo {
@@ -7,6 +9,14 @@ $border-color: #6c63ff;
   width: 100%;
   margin: 0 auto;
   text-align: center;
+
+  &.dark-theme {
+    background-color: $text-color-dark;
+
+    .todo__title {
+      color: $text-color;
+    }
+  }
 }
 
 .button__theme {
