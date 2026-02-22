@@ -1,6 +1,7 @@
 $primary-color: #6c63ff;
 $text-color: #f7f7f7;
 $border-color: #6c63ff;
+$text-color-dark: #000000;
 
 .todo__field {
   display: flex;
@@ -23,6 +24,16 @@ $border-color: #6c63ff;
     font-size: 16px;
     line-height: 100%;
     pointer-events: none;
+  }
+
+  .dark-theme & {
+    background-color: #252525; 
+    color: $text-color;
+    border-color: $text-color;
+
+    &::placeholder {
+      color: #666666;
+    }
   }
 }
 

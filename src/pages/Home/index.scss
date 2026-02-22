@@ -1,13 +1,13 @@
 $primary-color: #6c63ff;
 $text-color: #f7f7f7;
-$text-color-dark: #000000;
+$text-color-dark: #252525;
 $border-color: #6c63ff;
 $border-color: #6c63ff;
 
 .todo {
-  max-width: 750px;
   width: 100%;
-  margin: 0 auto;
+  min-height: 100vh;
+  margin: 0;
   text-align: center;
 
   &.dark-theme {
@@ -17,6 +17,20 @@ $border-color: #6c63ff;
       color: $text-color;
     }
   }
+}
+
+.field {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.todo__title, 
+.todo-list {
+  width: 100%;
+  max-width: 750px;
 }
 
 .button__theme {
@@ -52,10 +66,9 @@ $border-color: #6c63ff;
   }
 }
 
-.todo__title {
-  text-transform: uppercase;
-  font-weight: 500;
-  margin-bottom: 18px;
+.todo__title, .field, .todo-list {
+  max-width: 750px; 
+  width: 100%;
 }
 
 .button__add {

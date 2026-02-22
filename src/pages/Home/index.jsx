@@ -7,7 +7,7 @@ import SearchField from '../../ui/SearchField/SearchField.jsx'
 import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
-//dvcfffdv
+
   const getTodosFromStorage = () => {
     try {
       const savedTasks = localStorage.getItem('tasks');
@@ -90,7 +90,7 @@ const Home = () => {
       <div className={`todo ${themeClass}`}>
         <h1 className="todo__title">TODO LIST</h1>
         <form className="todo__field field">
-          <SearchField placeholder="Search note..." iconColor="#6C63FF" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+          <SearchField placeholder="Search note..." iconColor={theme ? "#F7F7F7" : "#6C63FF"} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
           <Select className="select__all" value={filter} onChange={setFilter}/>        
           <Button type="button" className="button__theme" onClick={handleToggleTheme}><MoonIcon color="#F7F7F7"/></Button>
         </form>
