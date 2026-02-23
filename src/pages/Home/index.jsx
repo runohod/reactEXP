@@ -7,7 +7,7 @@ import SearchField from '../../ui/SearchField/SearchField.jsx'
 import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
-
+///
   const getTodosFromStorage = () => {
     try {
       const savedTasks = localStorage.getItem('tasks');
