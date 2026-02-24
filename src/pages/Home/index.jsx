@@ -7,7 +7,7 @@ import SearchField from '../../ui/SearchField/SearchField.jsx'
 import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
-///
+
   const getTodosFromStorage = () => {
     try {
       const savedTasks = localStorage.getItem('tasks');
@@ -35,10 +35,6 @@ const Home = () => {
   const [newTaskText, setNewTaskText] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [theme, toggleTheme] = useState(false);
-
-  const handleToggleTheme = (event) => {event.preventDefault(); toggleTheme(prev => !prev);};
-
-  const themeClass = theme ? 'dark-theme' : 'light-theme';
 
   const filteredTasks = useMemo(() => {
       return tasks.filter((task) => {
@@ -85,12 +81,18 @@ const Home = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
+  const handleToggleTheme = (event) => {event.preventDefault(); toggleTheme(prev => !prev);};
+
+  useEffect(() => {
+  document.documentElement.setAttribute('data-theme', theme ? 'dark' : 'light');
+  }, [theme]);
+
     return (
     <ThemeContext.Provider value={{ theme, toggleTheme: handleToggleTheme}}> 
-      <div className={`todo ${themeClass}`}>
+      <div className="todo">
         <h1 className="todo__title">TODO LIST</h1>
         <form className="todo__field field">
-          <SearchField placeholder="Search note..." iconColor={theme ? "#F7F7F7" : "#6C63FF"} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+          <SearchField placeholder="Search note..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
           <Select className="select__all" value={filter} onChange={setFilter}/>        
           <Button type="button" className="button__theme" onClick={handleToggleTheme}><MoonIcon color="#F7F7F7"/></Button>
         </form>

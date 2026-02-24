@@ -1,22 +1,26 @@
-$primary-color: #6c63ff;
-$text-color: #f7f7f7;
-$text-color-dark: #252525;
-$border-color: #6c63ff;
-$border-color: #6c63ff;
+:root {
+  --primary-color: #6c63ff;
+  --bg-color: #ffffff;
+  --text-color: #252525;
+  --border-color: #6c63ff;
+  --search-text: #C3C1E5;
+}
+
+[data-theme='dark'] {
+  --bg-color: #252525;
+  --text-color: #f7f7f7;
+  --border-color: #f7f7f7; 
+  --placeholder-color: #252525;
+  --search-text: #666666;
+}
 
 .todo {
   width: 100%;
   min-height: 100vh;
   margin: 0;
   text-align: center;
-
-  &.dark-theme {
-    background-color: $text-color-dark;
-
-    .todo__title {
-      color: $text-color;
-    }
-  }
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .field {
@@ -34,8 +38,8 @@ $border-color: #6c63ff;
 }
 
 .button__theme {
-  background-color: $border-color;
-  color: $text-color;
+  background-color: var(--border-color);
+  color: var(--text-color);
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -47,7 +51,7 @@ $border-color: #6c63ff;
 }
 
 .todo-item__delete-button {
-  background-color: #ffffff;
+  background-color: var(--bg-color);
   border: none;
   width: 50px;
   height: 50px;
@@ -61,7 +65,7 @@ $border-color: #6c63ff;
 
   &:hover {
     svg path {
-      stroke: $primary-color;
+      stroke: var(--primary-color);
     }
   }
 }
@@ -72,8 +76,8 @@ $border-color: #6c63ff;
 }
 
 .button__add {
-  background-color: $border-color;
-  color: $text-color;
+  background-color: var(--primary-color);
+  color: #ffffff;
   border: none;
   border-radius: 50px;
   width: 50px;
