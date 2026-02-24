@@ -1,5 +1,4 @@
 $primary-color: #6c63ff;
-$text-color: #f7f7f7;
 $border-color: #6c63ff;
 
 .modal {
@@ -17,7 +16,7 @@ $border-color: #6c63ff;
 .modal__content {
   width: 500px;
   height: 289px;
-  background-color: white;
+  background-color: var(--bg-color);
   border-radius: 15px;
 }
 
@@ -31,20 +30,22 @@ $border-color: #6c63ff;
 
 .modal__input {
   width: 440px;
-  border: 1px solid $border-color;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   outline: none;
   height: 38px;
   cursor: pointer;
   margin-bottom: 110px;
   padding-left: 16px;
+  
 
   &::placeholder {
-    color: #c3c1e5;
+    color: var(--search-text);
     font-weight: 500;
     font-size: 16px;
     line-height: 100%;
     pointer-events: none;
+    background-color: var(--bg-color);
   }
 }
 
@@ -62,7 +63,7 @@ $border-color: #6c63ff;
   border: 1px solid $border-color;
   border-radius: 5px;
   cursor: pointer;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--bg-color);
   color: $primary-color;
   font-weight: 500;
   font-size: 18px;

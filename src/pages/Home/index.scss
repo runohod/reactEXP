@@ -4,6 +4,7 @@
   --text-color: #252525;
   --border-color: #6c63ff;
   --search-text: #C3C1E5;
+  --text-edit: #252525;
 }
 
 [data-theme='dark'] {
@@ -12,6 +13,8 @@
   --border-color: #f7f7f7; 
   --placeholder-color: #252525;
   --search-text: #666666;
+  --primary-color: #f7f7f7;
+  --text-edit: #FFFFFF80;
 }
 
 .todo {
@@ -38,7 +41,7 @@
 }
 
 .button__theme {
-  background-color: var(--border-color);
+  background-color: #6C63FF;
   color: var(--text-color);
   border: none;
   cursor: pointer;
@@ -76,7 +79,7 @@
 }
 
 .button__add {
-  background-color: var(--primary-color);
+  background-color: #6C63FF;
   color: #ffffff;
   border: none;
   border-radius: 50px;

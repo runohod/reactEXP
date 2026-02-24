@@ -4,6 +4,7 @@ import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
 import SearchField from '../../ui/SearchField/SearchField.jsx'
+import SunIcon from '../../ui/Icons/SunIcon.jsx';
 import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
@@ -94,7 +95,7 @@ const Home = () => {
         <form className="todo__field field">
           <SearchField placeholder="Search note..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
           <Select className="select__all" value={filter} onChange={setFilter}/>        
-          <Button type="button" className="button__theme" onClick={handleToggleTheme}><MoonIcon color="#F7F7F7"/></Button>
+          <Button type="button" className="button__theme" onClick={handleToggleTheme}>{theme ? <SunIcon color="#F7F7F7"/> : <MoonIcon color="#F7F7F7"/>}</Button>
         </form>
 
         <TodoList 
