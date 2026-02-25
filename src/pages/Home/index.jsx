@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { ThemeContext, useTheme } from '../../ui/context/themeContext.jsx';
+import { useEffect, useState, useCallback } from 'react';
+import { useTheme } from '../../ui/context/themeContext.jsx';
 import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
@@ -8,62 +8,30 @@ import SunIcon from '../../ui/Icons/SunIcon.jsx';
 import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
 import './index.scss';
-
-  const getTodosFromStorage = () => {
-    try {
-      const savedTasks = localStorage.getItem('tasks');
-       if (savedTasks) {
-        return JSON.parse(savedTasks)
-       }
-      return [
-        { id: 'task-1', text: 'NOTE #1', isDone: true},
-        { id: 'task-2', text: 'NOTE #2', isDone: false},
-        { id: 'task-3', text: 'NOTE #3', isDone: false},
-      ]
-    }
-    catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
+import { useTodo } from '../../hooks/use-todo.jsx';
 
 const Home = () => { 
+  const {
+    tasks,
+    filter,
+    searchQuery,
+    editId,
+    newTaskText,
+    filteredTasks,
+    handleEdit,
+    setTasks,
+    setFilter,
+    setSearchQuery,
+    setEditId,
+    setNewTaskText,
+    handleDelete,
+    handleToggle,
+    handleUpdateText,
+  } = useTodo();
 
-  const [tasks, setTasks] = useState(getTodosFromStorage);
-  const [filter, setFilter] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [editId, setEditId] = useState('');
-  const [newTaskText, setNewTaskText] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [theme, toggleTheme] = useState(false);
-
-  const filteredTasks = useMemo(() => {
-      return tasks.filter((task) => {
-        const search = task.text.toLowerCase().includes(searchQuery.toLowerCase());
-        if (!search) return false;
-        if (filter === "all") return true;
-        if (filter === "true") return task.isDone;
-        if (filter === "false") return !task.isDone;
-        return true;
-      });
-  }, [tasks, filter, searchQuery]);
-
-  const handleEdit = useCallback((id) => {setEditId(id);}, []);
   const openModal = useCallback(() => {setIsModalOpen(true);}, []);
-  const handleDelete = useCallback((id) => {setTasks(prev => prev.filter(task => task.id !== id));}, []);
-  const handleToggle = useCallback((id) => {setTasks(prev => prev.map(task => task.id === id ? { ...task, isDone: !task.isDone } : task));}, []);
   const handleCancel = useCallback (() => {setIsModalOpen(false);setNewTaskText('');}, []);
-
-  const handleUpdateText = useCallback((id, newText) => {
-    if (newText.trim() === "") {
-      handleDelete(id);
-      setEditId(null)
-    } else {
-    setTasks(prev => prev.map(task => 
-      task.id === id ? { ...task, text: newText } : task
-    ));
-    }
-  }, [handleDelete]);
 
   const addTask = useCallback(() => {
     if (!newTaskText.trim()) return;
@@ -82,12 +50,7 @@ const Home = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
-  // const handleToggleTheme = (event) => {event.preventDefault(); toggleTheme(prev => !prev);};
   const theme = useTheme();
-
-  // useEffect(() => {
-  // document.documentElement.setAttribute('data-theme', theme ? 'dark' : 'light');
-  // }, [theme]);
 
     return (
       <div className="todo">
@@ -95,7 +58,7 @@ const Home = () => {
         <form className="todo__field field">
           <SearchField placeholder="Search note..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
           <Select className="select__all" value={filter} onChange={setFilter}/>        
-          <Button type="button" className="button__theme" onClick={handleToggleTheme}>{theme ? <SunIcon color="#F7F7F7"/> : <MoonIcon color="#F7F7F7"/>}</Button>
+          <Button type="button" className="button__theme" onClick={theme.toggleTheme}>{theme?.isLightTheme ? (<SunIcon color="#F7F7F7"/>) : (<MoonIcon color="#F7F7F7"/>)}</Button>
         </form>
 
         <TodoList 
