@@ -7,7 +7,6 @@ const SearchField = ({
   value, 
   onChange, 
   className = '', 
-  iconColor = '',
   ...otherProps
 
 }) => {
@@ -30,7 +29,7 @@ useEffect(() => {
         value={value}
         onChange={onChange}
       />
-        <SearchIcon className="field__search-icon" color={iconColor} />
+        <SearchIcon className="field__search-icon" />
     </div>
   );
 };

@@ -1,14 +1,10 @@
-$primary-color: #6c63ff;
-$text-color: #f7f7f7;
-$border-color: #6c63ff;
-
 .todo__item {
   display: flex;
   align-items: center;
   padding-bottom: 17px;
   width: 100%;
   width: 525px;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid #6C63FF;
 }
 
 .todo-item__checkbox {
@@ -17,7 +13,7 @@ $border-color: #6c63ff;
   -webkit-appearance: none;
   width: 26px;
   height: 26px;
-  border: 1px solid $border-color;
+  border: 1px solid #6C63FF;
   border-radius: 2px;
   cursor: pointer;
   margin-right: 17px;
@@ -41,12 +37,12 @@ $border-color: #6c63ff;
 .todo-item--completed {
   .todo-item__label {
     text-decoration: line-through;
-    color: #25252580;
+    color: var(--text-edit);
     opacity: 0.5;
   }
 
   .todo-item__checkbox {
-    background-color: $border-color;
+    background-color: #6C63FF;
   }
 }
 

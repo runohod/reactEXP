@@ -4,4 +4,3 @@ const MoonIcon = ({color = '#6C63FF' }) => (
 
 export default MoonIcon;
 
-

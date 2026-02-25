@@ -1,17 +1,55 @@
-$primary-color: #6c63ff;
-$text-color: #f7f7f7;
-$border-color: #6c63ff;
+:root {
+  --primary-color: #6c63ff;
+  --bg-color: #ffffff;
+  --text-color: #252525;
+  --border-color: #6c63ff;
+  --search-text: #C3C1E5;
+  --text-edit: #252525;
+}
+
+[data-theme='dark'] {
+  --bg-color: #252525;
+  --text-color: #f7f7f7;
+  --border-color: #f7f7f7; 
+  --placeholder-color: #252525;
+  --search-text: #666666;
+  --primary-color: #f7f7f7;
+  --text-edit: #FFFFFF80;
+}
+
+// html, body {
+//   margin: 0;
+//   padding: 0;
+//   min-height: 100vh;
+//   background-color: var(--bg-color); 
+// }
 
 .todo {
-  max-width: 750px;
   width: 100%;
-  margin: 0 auto;
+  min-height: 100vh;
+  margin: 0;
   text-align: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.field {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.todo__title, 
+.todo-list {
+  width: 100%;
+  max-width: 750px;
 }
 
 .button__theme {
-  background-color: $border-color;
-  color: $text-color;
+  background-color: #6C63FF;
+  color: var(--text-color);
   border: none;
   cursor: pointer;
   border-radius: 5px;
@@ -23,7 +61,7 @@ $border-color: #6c63ff;
 }
 
 .todo-item__delete-button {
-  background-color: #ffffff;
+  background-color: var(--bg-color);
   border: none;
   width: 50px;
   height: 50px;
@@ -37,20 +75,19 @@ $border-color: #6c63ff;
 
   &:hover {
     svg path {
-      stroke: $primary-color;
+      stroke: var(--primary-color);
     }
   }
 }
 
-.todo__title {
-  text-transform: uppercase;
-  font-weight: 500;
-  margin-bottom: 18px;
+.todo__title, .field, .todo-list {
+  max-width: 750px; 
+  width: 100%;
 }
 
 .button__add {
-  background-color: $border-color;
-  color: $text-color;
+  background-color: #6C63FF;
+  color: #ffffff;
   border: none;
   border-radius: 50px;
   width: 50px;
