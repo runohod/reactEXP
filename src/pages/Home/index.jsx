@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { ThemeContext } from '../../ui/context/themeContext.jsx';
+import { ThemeContext, useTheme } from '../../ui/context/themeContext.jsx';
 import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../ui/TodoList/TodoList.jsx'
@@ -35,7 +35,7 @@ const Home = () => {
   const [editId, setEditId] = useState('');
   const [newTaskText, setNewTaskText] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [theme, toggleTheme] = useState(false);
+  // const [theme, toggleTheme] = useState(false);
 
   const filteredTasks = useMemo(() => {
       return tasks.filter((task) => {
@@ -82,14 +82,14 @@ const Home = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
 
-  const handleToggleTheme = (event) => {event.preventDefault(); toggleTheme(prev => !prev);};
+  // const handleToggleTheme = (event) => {event.preventDefault(); toggleTheme(prev => !prev);};
+  const theme = useTheme();
 
-  useEffect(() => {
-  document.documentElement.setAttribute('data-theme', theme ? 'dark' : 'light');
-  }, [theme]);
+  // useEffect(() => {
+  // document.documentElement.setAttribute('data-theme', theme ? 'dark' : 'light');
+  // }, [theme]);
 
     return (
-    <ThemeContext.Provider value={{ theme, toggleTheme: handleToggleTheme}}> 
       <div className="todo">
         <h1 className="todo__title">TODO LIST</h1>
         <form className="todo__field field">
@@ -121,7 +121,6 @@ const Home = () => {
           />
         )}
       </div>
-    </ThemeContext.Provider>
   );
 }
 
