@@ -1,5 +1,5 @@
-// import { useEffect, useRef } from 'react';
 import './ModalOpen.scss'
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const ModalOpen = ({
   placeholder="Input your note..." ,
@@ -11,18 +11,12 @@ const ModalOpen = ({
   autoFocus = false
 
 }) => { 
-    
-// const inputRef = useRef(null);
 
-// useEffect(() => {
-//     if (inputRef.current) {
-//       inputRef.current.focus();
-//     }
-// }, []);
+const modalRef = useOutsideClick(onCancel);
 
   return (
     <div className="modal">
-        <div className="modal__content">
+        <div className="modal__content" ref={modalRef}>
             <h2 className="modal__title">NEW NOTE</h2>
                 <input 
                     autoFocus={autoFocus}
