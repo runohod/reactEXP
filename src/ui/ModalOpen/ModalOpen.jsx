@@ -1,5 +1,5 @@
 import './ModalOpen.scss'
-import useOutsideClick from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const ModalOpen = ({
   placeholder="Input your note..." ,
