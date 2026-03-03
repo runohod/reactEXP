@@ -27,7 +27,7 @@ export const useTodo = () => {
 
   const filteredTasks = useMemo(() => {
       return tasks.filter((task) => {
-        const search = task.text.toLowerCase().includes(searchQuery.toLowerCase());
+        const search = task?.text.toLowerCase().includes(searchQuery.toLowerCase());
         if (!search) return false;
         if (filter === "all") return true;
         if (filter === "true") return task.isDone;
