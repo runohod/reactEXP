@@ -49,6 +49,11 @@ $border-color: #6c63ff;
   }
 }
 
+.modal__input {
+  background-color: var(--bg-color);
+  color: var(--search-text);
+}
+
 .modal__input--error {
   border: 2px solid #ee0c0c;
 }
