@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useTheme } from '../../ui/context/themeContext.jsx';
 import Select from '../../ui/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
@@ -12,18 +12,17 @@ import { useTodo } from '../../hooks/use-todo.jsx';
 
 const Home = () => { 
   const {
-    tasks,
     filter,
     searchQuery,
     editId,
     newTaskText,
     filteredTasks,
     handleEdit,
-    setTasks,
+    addTask,
+    setNewTaskText,
     setFilter,
     setSearchQuery,
     setEditId,
-    setNewTaskText,
     handleDelete,
     handleToggle,
     handleUpdateText,
@@ -31,25 +30,8 @@ const Home = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = useCallback(() => {setIsModalOpen(true);}, []);
-  const handleCancel = useCallback (() => {setIsModalOpen(false);setNewTaskText('');}, []);
-
-  const addTask = useCallback(() => {
-    if (!newTaskText.trim()) return;
-
-    const newTask = {
-      id: crypto.randomUUID(),
-      text: newTaskText,
-      isDone: false
-    };
-
-    setTasks(prev => [...prev, newTask]);
-    handleCancel();
-  }, [newTaskText]);
-
-  useEffect ( () => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
-
+  const handleCancel = useCallback (() => {setIsModalOpen(false);setNewTaskText('');}, [setNewTaskText]);
+  const handleApply = () => {addTask(); setIsModalOpen(false);};
   const theme = useTheme();
 
     return (
@@ -78,9 +60,9 @@ const Home = () => {
             autoFocus={true}
             value={newTaskText} 
             onChange={(e) => setNewTaskText(e.target.value)} 
-            onKeyDown={(e) => { if (e.key === 'Enter') { addTask(e);}}}
+            onKeyDown={(e) => { if (e.key === 'Enter') handleApply(); }}
             onCancel={handleCancel} 
-            onApply={addTask} 
+            onApply={handleApply} 
           />
         )}
       </div>
