@@ -1,3 +1,5 @@
+const URL = import.meta.env.VITE_API_URL;
+
 const headers = {
   'Content-Type': 'application/json',
 }
