@@ -1,12 +1,10 @@
-const URL = import.meta.env.VITE_API_URL;
+class tasksApi {
 
-const headers = {
-  'Content-Type': 'application/json',
-}
+_url = import.meta.env.VITE_API_URL;
+_headers = {'Content-Type': 'application/json',};
 
-const tasksApi = {
-  getAll: () => {
-    return fetch(URL)
+  getAll () {
+    return fetch(this._url)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Ошибка сервера: ${response.status}`);
@@ -17,36 +15,78 @@ const tasksApi = {
         console.error("Не удалось загрузить задачи:", error.message);
         throw error;
       });
-  },
+  }
 
-  add: (task) => {
-    return fetch(URL, {
+  add (task) {
+    return fetch(this._url, {
       method: 'POST',
-      headers,
-      body: JSON.stringify(task),
+      headers: this._headers,
+      body: JSON.stringify(task)
     })
-      .then((response) => response.json())
-  },
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Ошибка сервера: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Не удалось загрузить задачи:", error.message);
+        throw error;
+      });
+  }
 
-  delete: (id) => {
-    return fetch(`${URL}/${id}`, { method: 'DELETE' })
-  },
+  delete (id) {
+    return fetch(`${this._url}/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Ошибка сервера: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Не удалось загрузить задачи:", error.message);
+        throw error;
+      });
+  }
 
-  toggleComplete: (id, isDone) => {
-    return fetch(`${URL}/${id}`, {
+  toggleComplete (id, isDone) {
+    return fetch(`${this._url}/${id}`, {
       method: 'PATCH',
-      headers,
+      headers: this._headers,
       body: JSON.stringify({ isDone })
     })
-  },
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Ошибка сервера: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Не удалось загрузить задачи:", error.message);
+        throw error;
+      });
+  }
 
-  updateText: (id, newText) => {
-    return fetch(`${URL}/${id}`, {
+  updateText (id, newText) {
+    return fetch(`${this._url}/${id}`, {
       method: 'PATCH',
-      headers,
+      headers: this._headers,
       body: JSON.stringify({ text: newText }) 
-    }).then((response) => response.json())
-  },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Ошибка сервера: ${response.status}`);
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Не удалось загрузить задачи:", error.message);
+        throw error;
+      });
+  }
 }
 
-export default tasksApi
+const api = new tasksApi();
+export default api;

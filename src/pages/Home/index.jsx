@@ -7,8 +7,8 @@ import SearchField from '../../ui/SearchField/SearchField.jsx'
 import SunIcon from '../../ui/Icons/SunIcon.jsx';
 import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
 import Button from '../../ui/Button/Button.jsx'
-import './index.scss';
 import { useTodo } from '../../hooks/use-todo.jsx';
+import './index.scss';
 
 const Home = () => { 
   const {
