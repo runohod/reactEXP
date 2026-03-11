@@ -7,7 +7,7 @@
   border-bottom: 1px solid #6C63FF;
 }
 
-.todo-item__checkbox {
+.todoItem__checkbox {
   width: 26px;
   height: 26px;
   -webkit-appearance: none;
@@ -19,13 +19,13 @@
   margin-right: 17px;
 }
 
-.todo-item__checkbox:checked {
+.todoItem__checkbox:checked {
  background-image: url("../../assets/svg/checked.svg");
  background-repeat: no-repeat;
  background-position: center center;
 }
 
-.todo-item__label {
+.todoItem__label {
   width: 420px;
   cursor: pointer;
   font-weight: 500;
@@ -34,24 +34,24 @@
   align-items: center;
 }
 
-.todo-item--completed {
-  .todo-item__label {
+.todoItemCompleted {
+  .todoItem__label {
     text-decoration: line-through;
     color: var(--text-edit);
     opacity: 0.5;
   }
 
-  .todo-item__checkbox {
+  .todoItem__checkbox {
     background-color: #6C63FF;
   }
 }
 
-.todo-item__actions {
+.todoItem__actions {
   display: flex;
   gap: 5px;
 }
 
-.todo-item__edit {
+.todoItem__edit {
   flex: 1;
   font-size: 16px;
   color: #C8C8C8;

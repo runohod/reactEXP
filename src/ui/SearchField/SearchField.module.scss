@@ -25,14 +25,14 @@
 }
 
 .field {
-  &__search-wrapper {
+  &__searchWrapper {
     position: relative;
     flex-grow: 1;
     display: flex;
     align-items: center;
   }
 
-  &__search-icon {
+  &__searchIcon {
     position: absolute;
     right: 8.5px;
     pointer-events: none;

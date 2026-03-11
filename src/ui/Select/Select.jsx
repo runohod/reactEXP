@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import './Select.scss'
+import styles from './Select.module.scss'
 
 const Select = ({value, onChange, className=''}) => {
-    const classes = clsx('select-all', className);
+    const classes = clsx(styles.selectAll, className);
     return (
         <select className={classes} value={value} onChange={(e) => onChange(e.target.value)}>
             <option value="all">ALL</option>

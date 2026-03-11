@@ -2,7 +2,7 @@ import { memo } from 'react';
 import Button from '../Button/Button.jsx';
 import DeleteIcons from '../Icons/DeleteIcons.jsx';
 import EditIcons from '../Icons/EditIcons.jsx';
-import './TodoItem.scss';
+import styles from './TodoItem.module.scss';
 
 const EditIcon = () => <EditIcons />;
 const DeleteIcon = () => <DeleteIcons />;
@@ -29,9 +29,9 @@ const TodoItem = ({
   };
 
   return (
-    <li className={`todo__item ${isDone ? 'todo-item--completed' : ''}`}>
+    <li className={`${styles.todo__item} ${isDone ? styles.todoItemCompleted : ''}`}>
       <input 
-        className="todo-item__checkbox" 
+        className={styles.todoItem__checkbox}
         id={id} 
         type="checkbox" 
         checked={isDone} 
@@ -42,21 +42,21 @@ const TodoItem = ({
         <input 
           autoFocus 
           type="text"
-          className="todo-item__edit" 
+          className={styles.todoItem__edit} 
           value={text} 
           onChange={handleUpdate}
           onKeyDown={handleKeyDown} 
           onBlur={() => setEditId(null)} 
         />
       ) : (
-        <label className="todo-item__label" htmlFor={id}>{text}</label>
+        <label className={styles.todoItem__label} htmlFor={id}>{text}</label>
       )}
 
-      <div className="todo-item__actions">
-        <Button className="button--icon" onClick={handleEdit}>
+      <div className={styles.todoItem__actions}>
+        <Button className={styles.buttonIcon} onClick={handleEdit}>
           <EditIcon />
         </Button>
-        <Button className="button--icon" onClick={handleDelete}>
+        <Button className={styles.buttonIcon} onClick={handleDelete}>
           <DeleteIcon />
         </Button>
       </div>
