@@ -3,7 +3,7 @@ import TodoItem from '../TodoItem/TodoItem';
 import EmptyIcon from '../Icons/EmptyIcon.jsx';
 import styles from './TodoList.module.scss'
 
-const TodoList = ({ tasks, onDelete, onEdit, onToggle, editId, setEditId, onUpdateText }) => {
+const TodoList = ({ tasks, editId, ...otherProps }) => {
     if (tasks.length === 0) {
       return (
         <div className={styles.noFound}>
@@ -17,15 +17,11 @@ const TodoList = ({ tasks, onDelete, onEdit, onToggle, editId, setEditId, onUpda
         {tasks.map((task) => (
           <TodoItem 
             key={task.id} 
+            id={task.id}
+            text={task.text}
             isDone={task.isDone}
-            id={task.id} 
-            text={task.text} 
             isEditing={task.id === editId}
-            onDelete={onDelete} 
-            onEdit={onEdit} 
-            onToggle={onToggle}
-            setEditId={setEditId} 
-            onUpdateText={onUpdateText}
+            {...otherProps}
           />
         ))}
     </ul>
