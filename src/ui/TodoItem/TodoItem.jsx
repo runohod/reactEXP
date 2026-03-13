@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import Button from '../Button/Button.jsx';
 import DeleteIcons from '../Icons/DeleteIcons.jsx';
 import EditIcons from '../Icons/EditIcons.jsx';
@@ -18,14 +18,22 @@ const TodoItem = ({
   setEditId, 
   onUpdateText 
 }) => {
+
+  const inputRef = useRef(null);
  
   const handleToggle = () => onToggle(id);
   const handleEdit = () => onEdit(id);
   const handleDelete = () => onDelete(id);
-  const handleUpdate = (e) => onUpdateText(id, e.target.value);
+  // const handleUpdate = (e) => onUpdateText(id, e.target.value);
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === 'Escape') setEditId(null);
+  const handleSave = () => {
+    const newValue = inputRef.current.value;
+    onUpdateText(id, newValue); 
+  };
+
+const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleSave();
+    if (e.key === 'Escape') setEditId(null);
   };
 
   return (
@@ -40,13 +48,13 @@ const TodoItem = ({
       
       {isEditing ? (
         <input 
+          ref={inputRef}
           autoFocus 
           type="text"
           className={styles.todoItem__edit} 
-          value={text} 
-          onChange={handleUpdate}
+          defaultValue={text}
           onKeyDown={handleKeyDown} 
-          onBlur={() => setEditId(null)} 
+          onBlur={handleSave} 
         />
       ) : (
         <label className={styles.todoItem__label} htmlFor={id}>{text}</label>
