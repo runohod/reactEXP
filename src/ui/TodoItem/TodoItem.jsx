@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { memo, useRef, useState } from 'react';
 import Button from '../Button/Button.jsx';
 import DeleteIcons from '../Icons/DeleteIcons.jsx';
 import EditIcons from '../Icons/EditIcons.jsx';
@@ -12,28 +12,27 @@ const TodoItem = ({
   id, 
   isDone, 
   onDelete, 
-  onEdit, 
   onToggle, 
-  isEditing, 
-  setEditId, 
   onUpdateText 
 }) => {
 
+  const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef(null);
  
   const handleToggle = () => onToggle(id);
-  const handleEdit = () => onEdit(id);
   const handleDelete = () => onDelete(id);
-  // const handleUpdate = (e) => onUpdateText(id, e.target.value);
 
   const handleSave = () => {
     const newValue = inputRef.current.value;
-    onUpdateText(id, newValue); 
+      if (newValue.trim() !== text) {
+       onUpdateText(id, newValue); 
+       }
+    setIsEditing(false);
   };
 
 const handleKeyDown = (e) => {
     if (e.key === 'Enter') handleSave();
-    if (e.key === 'Escape') setEditId(null);
+    if (e.key === 'Escape') setIsEditing(false);
   };
 
   return (
@@ -61,7 +60,7 @@ const handleKeyDown = (e) => {
       )}
 
       <div className={styles.todoItem__actions}>
-        <Button className={styles.buttonIcon} onClick={handleEdit}>
+        <Button className={styles.buttonIcon} onClick={() => setIsEditing(true)}>
           <EditIcon />
         </Button>
         <Button className={styles.buttonIcon} onClick={handleDelete}>
