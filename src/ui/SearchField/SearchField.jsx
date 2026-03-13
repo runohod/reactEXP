@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import SearchIcon from '../Icons/SearchIcon'
-import './SearchField.scss'
+import styles from './SearchField.module.scss'
 
 const SearchField = ({ 
   placeholder = 'Search note...', 
@@ -20,16 +20,16 @@ useEffect(() => {
 }, []);
 
   return (
-    <div className={`field__search-wrapper ${className}`} {...otherProps}>
+    <div className={`${styles.field__searchWrapper} ${className}`} {...otherProps}>
       <input 
         ref={inputRef}
         type="text"
-        className="field__input" 
+        className={styles.field__input}
         placeholder={placeholder} 
         value={value}
         onChange={onChange}
       />
-        <SearchIcon className="field__search-icon" />
+        <SearchIcon className={styles.field__searchIcon} />
     </div>
   );
 };

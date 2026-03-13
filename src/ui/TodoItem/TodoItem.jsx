@@ -1,8 +1,8 @@
-import { memo } from 'react';
+import { memo, useRef, useState } from 'react';
 import Button from '../Button/Button.jsx';
 import DeleteIcons from '../Icons/DeleteIcons.jsx';
 import EditIcons from '../Icons/EditIcons.jsx';
-import './TodoItem.scss';
+import styles from './TodoItem.module.scss';
 
 const EditIcon = () => <EditIcons />;
 const DeleteIcon = () => <DeleteIcons />;
@@ -12,26 +12,33 @@ const TodoItem = ({
   id, 
   isDone, 
   onDelete, 
-  onEdit, 
   onToggle, 
-  isEditing, 
-  setEditId, 
   onUpdateText 
 }) => {
+
+  const [isEditing, setIsEditing] = useState(false);
+  const inputRef = useRef(null);
  
   const handleToggle = () => onToggle(id);
-  const handleEdit = () => onEdit(id);
   const handleDelete = () => onDelete(id);
-  const handleUpdate = (e) => onUpdateText(id, e.target.value);
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === 'Escape') setEditId(null);
+  const handleSave = () => {
+    const newValue = inputRef.current.value;
+      if (newValue.trim() !== text) {
+       onUpdateText(id, newValue); 
+       }
+    setIsEditing(false);
+  };
+
+const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleSave();
+    if (e.key === 'Escape') setIsEditing(false);
   };
 
   return (
-    <li className={`todo__item ${isDone ? 'todo-item--completed' : ''}`}>
+    <li className={`${styles.todo__item} ${isDone ? styles.todoItemCompleted : ''}`}>
       <input 
-        className="todo-item__checkbox" 
+        className={styles.todoItem__checkbox}
         id={id} 
         type="checkbox" 
         checked={isDone} 
@@ -40,23 +47,23 @@ const TodoItem = ({
       
       {isEditing ? (
         <input 
+          ref={inputRef}
           autoFocus 
           type="text"
-          className="todo-item__edit" 
-          value={text} 
-          onChange={handleUpdate}
+          className={styles.todoItem__edit} 
+          defaultValue={text}
           onKeyDown={handleKeyDown} 
-          onBlur={() => setEditId(null)} 
+          onBlur={handleSave} 
         />
       ) : (
-        <label className="todo-item__label" htmlFor={id}>{text}</label>
+        <label className={styles.todoItem__label} htmlFor={id}>{text}</label>
       )}
 
-      <div className="todo-item__actions">
-        <Button className="button--icon" onClick={handleEdit}>
+      <div className={styles.todoItem__actions}>
+        <Button className={styles.buttonIcon} onClick={() => setIsEditing(true)}>
           <EditIcon />
         </Button>
-        <Button className="button--icon" onClick={handleDelete}>
+        <Button className={styles.buttonIcon} onClick={handleDelete}>
           <DeleteIcon />
         </Button>
       </div>

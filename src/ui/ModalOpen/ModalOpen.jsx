@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './ModalOpen.scss'
+import styles from './ModalOpen.module.scss'
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 const ModalOpen = ({
@@ -33,22 +33,22 @@ const handleTextChange = (e) => {
 };
 
   return (
-    <div className="modal">
-        <div className="modal__content" ref={modalRef}>
-            <h2 className="modal__title">NEW NOTE</h2>
+    <div className={styles.modal}>
+        <div className={styles.modal__content} ref={modalRef}>
+            <h2 className={styles.modal__title}>NEW NOTE</h2>
                 <input 
                     autoFocus={autoFocus}
-                    className={`modal__input ${isError ? 'modal__input--error' : ''}`}
+                    className={`${styles.modal__input} ${isError ? styles['modal__input--error'] : ''}`}
                     type="text" 
                     placeholder={placeholder}
                     value={value} 
                     onChange={handleTextChange} 
                     onKeyDown={(e) => {if (e.key === 'Enter') {handleSubmit(); }}}
                 />
-                {isError && <p className="modal__error-text">Вы забыли написать задачу!</p>}
-            <div className="modal__actions">
-                <button className="modal__btn__cancel" onClick={onCancel}>CANCEL</button>
-                <button className="modal__btn__apply" onClick={handleSubmit}>APPLY</button>
+                {isError && <p className={styles['modal__error-text']}>Вы забыли написать задачу!</p>}
+            <div className={styles.modal__actions}>
+                <button className={styles.modal__btn__cancel} onClick={onCancel}>CANCEL</button>
+                <button className={styles.modal__btn__apply} onClick={handleSubmit}>APPLY</button>
             </div>
         </div>
     </div>
