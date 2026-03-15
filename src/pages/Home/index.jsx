@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
-import { useTheme } from '../../ui/context/themeContext.jsx';
+import { useTheme } from '../../ui/context/ThemeContext.jsx';
 import Select from '../../shared/Select/Select.jsx'
-import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
+import ModalOpen from '../../features/ModalOpen/ModalOpen.jsx'
 import TodoList from '../../widgets/TodoList/TodoList.jsx'
 import SearchField from '../../shared/SearchField/SearchField.jsx'
 import SunIcon from '../../shared/Icons/SunIcon.jsx';
