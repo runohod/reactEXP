@@ -1,13 +1,13 @@
 import { useState, useCallback } from 'react';
 import { useTheme } from '../../ui/context/themeContext.jsx';
-import Select from '../../ui/Select/Select.jsx'
+import Select from '../../shared/Select/Select.jsx'
 import ModalOpen from '../../ui/ModalOpen/ModalOpen.jsx'
-import TodoList from '../../ui/TodoList/TodoList.jsx'
-import SearchField from '../../ui/SearchField/SearchField.jsx'
-import SunIcon from '../../ui/Icons/SunIcon.jsx';
-import MoonIcon from '../../ui/Icons/MoonIcon.jsx'
-import Button from '../../ui/Button/Button.jsx'
-import { useTodo } from '../../hooks/use-todo.jsx';
+import TodoList from '../../widgets/TodoList/TodoList.jsx'
+import SearchField from '../../shared/SearchField/SearchField.jsx'
+import SunIcon from '../../shared/Icons/SunIcon.jsx';
+import MoonIcon from '../../shared/Icons/MoonIcon.jsx'
+import Button from '../../shared/Button/Button.jsx'
+import { useTodo } from '../../entities/todo/modal/use-todo.jsx';
 import styles from './index.module.scss';
 
 const Home = () => { 
