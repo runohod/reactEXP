@@ -1,6 +1,6 @@
 import { memo } from 'react'; 
 // import TodoItem from '../..//TodoItem/TodoItem.jsx';
-import TodoItem from '../../entities/TodoItem/TodoItem.jsx';
+import TodoItem from '../../entities/todo/ui/TodoItem/TodoItem.jsx';
 import EmptyIcon from '../../shared/Icons/EmptyIcon.jsx';
 import styles from './TodoList.module.scss'
 

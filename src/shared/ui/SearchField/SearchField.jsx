@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import SearchIcon from '../Icons/SearchIcon'
+import SearchIcon from '../../Icons/SearchIcon'
 import styles from './SearchField.module.scss'
 
 const SearchField = ({ 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './ModalOpen.module.scss'
-import { useOutsideClick } from '../../entities/todo/modal/useOutsideClick';
+import { useOutsideClick } from '../../shared/hooks/useOutsideClick';
 
 const ModalOpen = ({
   placeholder="Input your note..." ,

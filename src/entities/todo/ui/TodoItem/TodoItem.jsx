@@ -1,7 +1,7 @@
 import { memo, useRef, useState } from 'react';
-import Button from '../../shared/Button/Button.jsx';
-import DeleteIcons from '../../shared/Icons/DeleteIcons.jsx';
-import EditIcons from '../../shared/Icons/EditIcons.jsx';
+import Button from '../../../../shared/ui/Button/Button.jsx';
+import DeleteIcons from '../../../../shared/Icons/DeleteIcons.jsx';
+import EditIcons from '../../../../shared/Icons/EditIcons.jsx';
 import styles from './TodoItem.module.scss';
 
 const EditIcon = () => <EditIcons />;
