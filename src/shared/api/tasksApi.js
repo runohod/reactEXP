@@ -1,83 +1,88 @@
 class tasksApi {
+  _storageKey = 'todo_tasks';
 
-_url = import.meta.env.VITE_API_URL;
-_headers = {'Content-Type': 'application/json',};
+  _getAllFromStorage() {
+    const data = localStorage.getItem(this._storageKey);
+    return data ? JSON.parse(data) : [];
+  }
 
-  async getAll () {
+  _saveToStorage(tasks) {
+    localStorage.setItem(this._storageKey, JSON.stringify(tasks));
+  }
+
+  async getAll() {
     try {
-      const response = await fetch(this._url);
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
-      }
-      return await response.json();
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(this._getAllFromStorage());
+        }, );
+      });
     } catch (error) {
-      console.error("Не удалось загрузить задачи:", error.message);
+      console.error("Ошибка при получении задач:", error);
       throw error;
     }
   }
 
-  async add (task) {
+  async add(task) {
     try {
-      const response = await fetch(this._url, {
-        method: 'POST',
-        headers: this._headers,
-        body: JSON.stringify(task)
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const tasks = this._getAllFromStorage();
+          const newTask = { ...task, id: task.id || Date.now() };
+          this._saveToStorage([...tasks, newTask]);
+          resolve(newTask);
+        }, );
       });
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
-      }
-      return await response.json();
     } catch (error) {
-      console.error("Не удалось загрузить задачи:", error.message);
+      console.error("Ошибка при добавлении:", error);
       throw error;
     }
   }
 
-  async delete (id) {
+  async delete(id) {
     try {
-      const response = await fetch(`${this._url}/${id}`, {
-        method: 'DELETE',
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const tasks = this._getAllFromStorage();
+          const filtered = tasks.filter(t => t.id !== id);
+          this._saveToStorage(filtered);
+          resolve({ id });
+        }, );
       });
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
-      }
-      return await response.json();
     } catch (error) {
-      console.error("Не удалось загрузить задачи:", error.message);
+      console.error("Ошибка при удалении:", error);
       throw error;
     }
   }
 
-  async toggleComplete (id, isDone) {
+  async toggleComplete(id, isDone) {
     try {
-      const response = await fetch(`${this._url}/${id}`, {
-        method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({ isDone })
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const tasks = this._getAllFromStorage();
+          const updated = tasks.map(t => t.id === id ? { ...t, isDone } : t);
+          this._saveToStorage(updated);
+          resolve({ id, isDone });
+        }, );
       });
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
-      }
-      return await response.json();
     } catch (error) {
-      console.error("Не удалось загрузить задачи:", error.message);
+      console.error("Ошибка при обновлении статуса:", error);
       throw error;
     }
   }
 
-  async updateText (id, newText) {
+  async updateText(id, newText) {
     try {
-      const response = await fetch(`${this._url}/${id}`, {
-        method: 'PATCH',
-        headers: this._headers,
-        body: JSON.stringify({ text: newText })
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const tasks = this._getAllFromStorage();
+          const updated = tasks.map(t => t.id === id ? { ...t, text: newText } : t);
+          this._saveToStorage(updated);
+          resolve({ id, text: newText });
+        }, );
       });
-      if (!response.ok) {
-        throw new Error(`Ошибка сервера: ${response.status}`);
-      }
-      return await response.json();
     } catch (error) {
-      console.error("Не удалось загрузить задачи:", error.message);
+      console.error("Ошибка при обновлении текста:", error);
       throw error;
     }
   }
@@ -85,4 +90,3 @@ _headers = {'Content-Type': 'application/json',};
 
 const api = new tasksApi();
 export default api;
-

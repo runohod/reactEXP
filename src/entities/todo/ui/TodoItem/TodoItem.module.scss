@@ -32,7 +32,7 @@
 }
 
 .todoItem__checkbox:checked {
- background-image: url("../../../../shared/assets/svg/checked.svg");
+ background-image: url("@/shared/assets/svg/checked.svg");
  background-repeat: no-repeat;
  background-position: center center;
 }
