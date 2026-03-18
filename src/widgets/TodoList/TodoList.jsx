@@ -1,7 +1,7 @@
 import { memo } from 'react'; 
 // import TodoItem from '../..//TodoItem/TodoItem.jsx';
-import TodoItem from '../../entities/todo/ui/TodoItem/TodoItem.jsx';
-import EmptyIcon from '../../shared/Icons/EmptyIcon.jsx';
+import TodoItem from '../../entities/todo/ui/todoItem/todoItem.jsx';
+import EmptyIcon from '../../shared/icons/emptyIcon.jsx';
 import styles from './TodoList.module.scss'
 
 const TodoList = ({ tasks, editId, ...otherProps }) => {

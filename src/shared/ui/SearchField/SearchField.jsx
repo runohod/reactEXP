@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import SearchIcon from '../../Icons/SearchIcon'
-import styles from './SearchField.module.scss'
+import SearchIcon from '../../icons/searchIcon'
+import styles from './searchField.module.scss'
 
 const SearchField = ({ 
   placeholder = 'Search note...', 
