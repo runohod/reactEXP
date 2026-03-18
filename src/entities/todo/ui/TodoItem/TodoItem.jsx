@@ -1,7 +1,7 @@
 import { memo, useRef, useState } from 'react';
-import Button from '../Button/Button.jsx';
-import DeleteIcons from '../Icons/DeleteIcons.jsx';
-import EditIcons from '../Icons/EditIcons.jsx';
+import { Button } from '@/shared/ui';
+import DeleteIcons from '@/shared/icons/deleteIcons';
+import EditIcons from '@/shared/icons/editIcons';
 import styles from './TodoItem.module.scss';
 
 const EditIcon = () => <EditIcons />;
@@ -16,11 +16,18 @@ const TodoItem = ({
   onUpdateText 
 }) => {
 
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef(null);
  
   const handleToggle = () => onToggle(id);
-  const handleDelete = () => onDelete(id);
+
+  const handleDelete = () => {
+    setIsDeleting(true);
+    setTimeout(() => {
+      onDelete(id)
+      }, 500);
+  };
 
   const handleSave = () => {
     const newValue = inputRef.current.value;
@@ -36,7 +43,7 @@ const handleKeyDown = (e) => {
   };
 
   return (
-    <li className={`${styles.todo__item} ${isDone ? styles.todoItemCompleted : ''}`}>
+    <li className={`${styles.todo__item} ${isDone ? styles.todoItemCompleted : ''} ${isDeleting ? styles.deleting : ''}`}>
       <input 
         className={styles.todoItem__checkbox}
         id={id} 
