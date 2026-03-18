@@ -6,20 +6,19 @@ export const useTodo = () => {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [editId, setEditId] = useState('');
-  const [newTaskText, setNewTaskText] = useState('');
+  // const [newTaskText, setNewTaskText] = useState('');
 
-  const addTask = useCallback(() => {
-    if (!newTaskText.trim()) return;
+  const addTask = useCallback((title) => {
+    if (!title?.trim()) return;
 
-    tasksApi.add({
-      text: newTaskText,
+    return tasksApi.add({
+      text: title,
       isDone: false
     })
     .then((addedTask) => {
       setTasks(prev => [...prev, addedTask]);
-      setNewTaskText('');
     });
-  }, [newTaskText]);
+  }, []);
 
   const filteredTasks = useMemo(() => {
       return tasks.filter((task) => {
@@ -67,7 +66,6 @@ export const useTodo = () => {
     filter,
     searchQuery,
     editId,
-    newTaskText,
     filteredTasks,
     addTask,
     handleEdit,
@@ -75,7 +73,6 @@ export const useTodo = () => {
     setFilter,
     setSearchQuery,
     setEditId,
-    setNewTaskText,
     handleDelete,
     handleToggle,
     handleUpdateText,

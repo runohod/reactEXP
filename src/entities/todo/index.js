@@ -1,3 +1,3 @@
-export { TodoItem } from './ui/todoItem/todoItem.jsx';
+export { default as TodoItem } from './ui/todoItem/todoItem.jsx';
 export { useTodo } from './model/use-todo.jsx';
-export { tasksApi } from '../../shared/api/tasksApi.js'
+export { default as tasksApi } from '../../shared/api/tasksApi.js'

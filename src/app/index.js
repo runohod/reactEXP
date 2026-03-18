@@ -1,0 +1,1 @@
+export { themeContext } from './context/themeContext'; 
